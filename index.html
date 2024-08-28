@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Preço de Obras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Simulador de Preço de Obras por Metro Quadrado</h1>
+        <form method="POST">
+            <label for="tipo_obra">Tipo de Obra:</label>
+            <select name="tipo_obra" id="tipo_obra" required>
+                <option value="residencial">Residencial</option>
+                <option value="comercial">Comercial</option>
+                <option value="industrial">Industrial</option>
+                <option value="outro">Outro</option>
+            </select>
+
+            <label for="localizacao">Localização:</label>
+            <select name="localizacao" id="localizacao" required>
+                <option value="centro">Centro</option>
+                <option value="periferia">Bairro Social</option>
+                <option value="outro">Outro</option>
+            </select>
+
+            <label for="material">Qualidade dos Materiais:</label>
+            <select name="material" id="material" required>
+                <option value="luxo">Luxo</option>
+                <option value="padrão">Padrão</option>
+                <option value="económico">Econômico</option>
+            </select>
+
+            <label for="tamanho">Tamanho da Obra (m²):</label>
+            <input type="number" name="tamanho" id="tamanho" step="0.1" required>
+
+            <button type="submit">Calcular Preço</button>
+        </form>
+
+        {% if preco_final %}
+        <h2>O preço estimado da obra é: {{ "{:,.2f}".format(preco_final).replace(",", "v").replace(".", ",").replace("v", ".") }}€</h2>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
